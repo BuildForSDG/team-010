@@ -2,10 +2,14 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import userRoute from './routes/user.route';
 
 
 const app = express();
 app.use(morgan('dev'));
+
+const API_VERSION = '/api/v1';
+
 
 app.use(cors());
 
@@ -18,6 +22,8 @@ app.use(
 app.get('/', (req, res) => {
   res.status(200).json({ message: 'Welcome to FarmHub Api' });
 });
+
+app.use(`${API_VERSION}`, userRoute);
 
 
 app.all('*', (err, req, res, next) => {
