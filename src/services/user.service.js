@@ -43,17 +43,13 @@ class Userservice {
   static async isVerified({ params }) {
     try {
       const { token } = params;
-      const decoded = await Auth.decodeJwt(token);
+      const decoded = Auth.decodeJwt(token);
       if (decoded) {
         const updatedUser = await database.User.update(
           { isVerified: true },
           { where: { id: decoded.id } }
         );
-        if (updatedUser) {
-          return {
-            updatedUser
-          };
-        }
+        if (updatedUser) return updatedUser;
       }
       return null;
     } catch (error) {

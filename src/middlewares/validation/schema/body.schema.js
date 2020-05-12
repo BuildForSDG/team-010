@@ -20,9 +20,9 @@ const password = Joi.string()
 //   .required();
 
 const createUserSchema = Joi.object({
-  firstname: string.required(),
-  middlename: string.required(),
-  lastname: string.required(),
+  firstName: string.required(),
+  middleName: string.required(),
+  lastName: string.required(),
   userType: string.required(),
   role: string.required(),
   phone: Joi.string().trim().regex(/^[0-9]{7,10}$/).required(),
@@ -32,7 +32,6 @@ const createUserSchema = Joi.object({
     .valid(Joi.ref('password'))
     .required()
     .strict()
-    .error(new Error('Your password and confirm password do not match'))
 });
 
 const signinUserSchema = Joi.object({
