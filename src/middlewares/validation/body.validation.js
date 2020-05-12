@@ -1,4 +1,3 @@
-// import Joi from '@hapi/joi';
 import Schemas from './schema/body.schema';
 
 
@@ -26,7 +25,7 @@ const bodyValidation = (req, res, next) => {
         const SimplifiedError = {
           status: 400,
           error: error.details
-            ? error.details[0].message.replace(/['"]/g, '')
+            ? error.details.map((detail) => detail.message.replace(/['"]/g, ''))
             : error.message
         };
         // Send back the JSON error response
