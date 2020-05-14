@@ -9,14 +9,17 @@ class Userservice {
    * @param {object} a new user object
    */
 
-  static async addUser({ body }) {
+  static async addUser({ body }, res) {
     try {
       const foundUser = await database.User.findOne({
         where: { email: body.email }
       });
 
       if (foundUser) {
-        throw new Error('Email is already in use');
+        res.status(400).json({
+          status: 'rrorr',
+          message: 'Email is already in use'
+        });
       }
       const { password, confirmPassword, ...otherProps } = body;
       const hashedpassword = await GeneralUtils.hash(body.password);
@@ -32,9 +35,6 @@ class Userservice {
         ...otherProps
       };
     } catch (error) {
-      if (error.message === 'Email is already in use') {
-        throw error;
-      }
       return error;
     }
   }
@@ -52,7 +52,7 @@ class Userservice {
           { isVerified: true },
           { where: { id: decoded.id } }
         );
-        if (updatedUser) return updatedUser;
+        return updatedUser;
       }
       return null;
     } catch (error) {
