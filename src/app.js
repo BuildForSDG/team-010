@@ -1,9 +1,8 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import userRoute from './routes/user.route';
 import path from 'path';
-
+import Router from './routes/index';
 
 
 const app = express();
@@ -25,7 +24,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.resolve('./src/docs/index.html'));
 });
 
-app.use(`${API_VERSION}`, userRoute);
+app.use(`${API_VERSION}`, Router);
 
 
 app.all('*', (err, req, res, next) => {

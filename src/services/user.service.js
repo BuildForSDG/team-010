@@ -1,4 +1,4 @@
-/* eslint-disable no-useless-catch */
+// /* eslint-disable no-useless-catch */
 import database from '../models/index';
 import GeneralUtils from '../utils/general.utilities';
 import Auth from '../middlewares/auth.middleware';
@@ -26,13 +26,16 @@ class Userservice {
         ...otherProps
 
       });
-      const token = await Auth.signJwt(newUser);
+      const token = Auth.signJwt(newUser);
       return {
         token,
         ...otherProps
       };
-    } catch (err) {
-      throw err;
+    } catch (error) {
+      if (error.message === 'Email is already in use') {
+        throw error;
+      }
+      return error;
     }
   }
 
@@ -53,7 +56,7 @@ class Userservice {
       }
       return null;
     } catch (error) {
-      throw error;
+      return error;
     }
   }
 }

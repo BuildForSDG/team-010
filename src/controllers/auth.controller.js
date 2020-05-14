@@ -16,7 +16,7 @@ class AuthController {
   static async signup(req, res) {
     try {
       const user = await UserService.addUser(req);
-      if (user) {
+      if (user.email) {
         // 3) Send verification link  to user's email
         const verificationURL = `${req.protocol}://${req.get(
           'host'
