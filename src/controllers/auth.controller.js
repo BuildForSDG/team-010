@@ -58,8 +58,8 @@ class AuthController {
    */
 
   static async isVerified(req, res) {
+    const { token } = req.params;
     try {
-      const { token } = req.params;
       const decoded = Auth.decodeJwt(token);
       if (decoded) {
         const { id } = decoded;
@@ -69,7 +69,6 @@ class AuthController {
           message: 'your account has been verified, Welcome'
         });
       }
-
       return response.sendError(res, 500, 'Your token is wrong or has expired try again later!');
     } catch (error) {
       return response.sendError(res, 500, error.message);
