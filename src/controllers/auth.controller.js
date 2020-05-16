@@ -58,6 +58,7 @@ class AuthController {
    */
 
   static async isVerified(req, res) {
+    const { token } = req.params;
     try {
       const { token } = req.params;
       const decoded = await Auth.decodeJwt(token);
