@@ -70,7 +70,7 @@ class AuthController {
       }
       return response.sendError(res, 500, 'Your token has expired or it is not valid');
     } catch (error) {
-      return response.sendError(res, 500, error.message);
+      return response.sendError(res, 500, 'Your token is wrong or has expired try again later!');
     }
   }
 }
