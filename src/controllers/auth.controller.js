@@ -61,17 +61,13 @@ class AuthController {
     try {
       const { token } = req.params;
       const decoded = await Auth.decodeJwt(token);
-      if (decoded) {
-        const { id } = decoded;
-        await database.User.update({ isVerified: true }, { where: { id } });
-        return res.status(200).json({
-          status: 'success',
-          message: 'your account has been verified, Welcome'
-        });
-      }
-      return response.sendError(res, 500, 'Your token is wrong or has expired try again later!');
+      await database.User.update({ isVerified: true }, { where: { id: decoded.id } });
+      return res.status(200).json({
+        status: 'success',
+        message: 'your account has been verified, Welcome'
+      });
     } catch (error) {
-      return response.sendError(res, 500, error.message);
+      return response.sendError(res, 500, 'Your token is wrong or has expired try again later!');
     }
   }
 }
