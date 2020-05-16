@@ -2,10 +2,7 @@
   "name": "js-starter",
   "version": "0.0.1",
   "description": "A boilerplate for starting js code",
-  "keywords": [
-    "js-starter",
-    "boilerplate"
-  ],
+  "keywords": ["js-starter", "boilerplate"],
   "private": false,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,7 +11,6 @@
   },
   "scripts": {
     "test": "export NODE_ENV=test && sequelize db:migrate:undo:all  && sequelize db:migrate && jest",
-    "test2": "jest",
     "test:watch": "jest --watch",
     "test:cover": " export NODE_ENV=test && sequelize db:migrate:undo:all  && sequelize db:migrate && jest --coverage",
     "lint": "eslint \"src/**/*.js\"",
@@ -47,7 +43,6 @@
     "morgan": "^1.10.0",
     "nodemailer": "^6.4.6",
     "nodemon": "^2.0.3",
-
     "path": "^0.12.7",
     "pg": "^8.0.3",
     "pg-hstore": "^2.3.3",
@@ -67,7 +62,5 @@
     "parcel-bundler": "^1.12.4",
     "supertest": "^4.0.2"
   },
-  "browserslist": [
-    "last 1 Chrome versions"
-  ]
+  "browserslist": ["last 1 Chrome versions"]
 }
