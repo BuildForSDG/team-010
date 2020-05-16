@@ -58,9 +58,9 @@ class AuthController {
    */
 
   static async isVerified(req, res) {
-    const { token } = req.params;
     try {
-      const decoded = Auth.decodeJwt(token);
+      const { token } = req.params;
+      const decoded = await Auth.decodeJwt(token);
       if (decoded) {
         const { id } = decoded;
         await database.User.update({ isVerified: true }, { where: { id } });
