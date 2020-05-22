@@ -23,9 +23,8 @@ const config = _config.default[env]; // console.log('this is the environment: ',
 const db = {};
 let sequelize;
 
-if (config.environment === 'production') {
-  sequelize = new _sequelize.default(process.env[config.use_env_variable], config);
-  sequelize = new _sequelize.default(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+if (env === 'production') {
+  sequelize = new _sequelize.default(process.env.DB_NAME_PROD, process.env.DB_USER, process.env.DB_PASS, {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: 'postgres',
@@ -33,7 +32,7 @@ if (config.environment === 'production') {
       ssl: true,
       native: true
     },
-    logging: true
+    logging: false
   });
 } else {
   sequelize = new _sequelize.default(config.database, config.username, config.password, config);
