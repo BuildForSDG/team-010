@@ -73,6 +73,38 @@ class AuthController {
       return response.sendError(res, 500, error.message);
     }
   }
+
+  static async login(req, res) {
+    try {
+      const { email, password } = req.body;
+      const user = await database.User.findOne({ where: { email } });
+      if (!user) {
+        return response.sendError(res, 403, 'Invalid credentials');
+      }
+      const {
+        firstName, lastName, isVerified, role
+      } = user;
+
+      if (!isVerified) {
+        return response.sendError(res, 400, 'Your account has not been verified');
+      }
+      const isPasswordValid = await GeneralUtils.compare(password, user.password);
+
+      if (!isPasswordValid) {
+        return response.sendError(res, 403, 'Invalid credentials');
+      }
+
+      const token = await Auth.signJwt(user);
+      return response.sendSuccess(res, 201, {
+        token,
+        firstName,
+        lastName,
+        role
+      });
+    } catch (error) {
+      return response.sendError(res, 400, error.message);
+    }
+  }
 }
 
 export default AuthController;
