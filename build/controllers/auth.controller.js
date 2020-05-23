@@ -22,7 +22,7 @@ const response = new _response.default();
 class AuthController {
   /**
    * @param {object} request express request object
-   * @param {object} response express request object
+   * @param {object} response express response object
    * @returns {json} json
    * @memberof UserController
    */
@@ -38,7 +38,7 @@ class AuthController {
       });
 
       if (foundUser) {
-        res.status(400).json({
+        return res.status(400).json({
           status: 'error',
           message: 'Email is already in use'
         });
@@ -84,19 +84,24 @@ class AuthController {
         token
       } = req.params;
       const decoded = await _auth.default.decodeJwt(token);
-      await _index.default.User.update({
-        isVerified: true
-      }, {
-        where: {
-          id: decoded.id
-        }
-      });
-      return res.status(200).json({
-        status: 'success',
-        message: 'your account has been verified, Welcome'
-      });
+
+      if (decoded) {
+        await _index.default.User.update({
+          isVerified: true
+        }, {
+          where: {
+            id: decoded.id
+          }
+        });
+        return res.status(200).json({
+          status: 'success',
+          message: 'your account has been verified, Welcome'
+        });
+      }
+
+      return response.sendError(res, 500, 'Your token has expired or it is not valid');
     } catch (error) {
-      return response.sendError(res, 500, 'Your token is wrong or has expired try again later!');
+      return response.sendError(res, 500, error.message);
     }
   }
 

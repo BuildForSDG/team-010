@@ -36,7 +36,7 @@
     "test:cover": " export NODE_ENV=test && sequelize db:migrate:undo:all  && sequelize db:migrate && jest --coverage",
     "lint": "eslint \"src/**/*.js\"",
     "start": "node ./build/index.js",
-    "start:dev": "npm run build && nodemon ./build/index.js",
+    "start:dev": "nodemon --exec babel-node ./src/index.js",
     "serve": "node ./build/index.js",
     "coveralls": "NODE_ENV=test jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
