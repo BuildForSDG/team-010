@@ -6,7 +6,7 @@ import database from '../src/models/index';
 /**
    * Test User Endpoints
    */
-describe('{GET/POST} Test user signup', () => {
+describe('{GET/POST} Test user signup/signin', () => {
 /**
    * Test the POST /auth/signup endpoint
    */
@@ -41,4 +41,13 @@ describe('{GET/POST} Test user signup', () => {
     expect(dataValues).toHaveProperty('phone', '7031059595');
     expect(dataValues.password).not.toBe('unencryptedPassword');
   });
+
+  // test('Should login existing user', async () => {
+  //   const response = await request(app).post('/api/v1/auth/signin').send({
+  //     email: 'raadeniyi22@gmail.com',
+  //     password: 'test1234'
+  //   }).expect(200);
+  //   const user = await database.User.findOne({ where: { email: 'raadeniyi22@gmail.com' } });
+  //   expect(response.body).toHaveProperty('token');
+  // });
 });

@@ -40,6 +40,6 @@ const signinUserSchema = Joi.object({
 });
 
 export default {
-  '/auth/signup': createUserSchema,
-  '/auth/signin': signinUserSchema
+  '/signup': createUserSchema,
+  '/signin': signinUserSchema
 };
