@@ -26,7 +26,7 @@ class AuthController {
           message: 'Email is already in use'
         });
       }
-      req.body.password = await GeneralUtils.hash(req.body.password);
+      req.body.password = GeneralUtils.hash(req.body.password);
       const newUser = await database.User.create(req.body);
       const result = newUser.toJSON();
       const token = Auth.signJwt(result);

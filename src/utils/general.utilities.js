@@ -20,7 +20,7 @@ const General = {
    * @param { String} password
    * @returns {String} hashpassword
    */
-  async hash(password) {
+  hash(password) {
     // const salt = bcrypt.genSaltSync(12);
     return bcrypt.hashSync(password, 12);
   },
