@@ -14,7 +14,8 @@ env:
     - export TEST_DB_PASSWORD=N_xf47Cco8WWtXzh887OSg2sOMQ5RdR_
     - export TEST_DB_HOST=drona.db.elephantsql.com
 
-cache: npm
+cache:
+  npm: false
 
 before_install:
   - npm config set spin false
