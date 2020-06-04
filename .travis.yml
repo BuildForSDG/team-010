@@ -13,6 +13,10 @@ env:
     - export TEST_DB_USER=uzqwdhvn
     - export TEST_DB_PASSWORD=N_xf47Cco8WWtXzh887OSg2sOMQ5RdR_
     - export TEST_DB_HOST=drona.db.elephantsql.com
+    - export EMAIL_USERNAME=88b41fce5c457e
+    - export EMAIL_PASSWORD=1e0308731e6e44
+    - export EMAIL_HOST=smtp.mailtrap.io
+    - export EMAIL_PORT=25
 
 cache:
   npm: false
