@@ -1,6 +1,4 @@
-"use strict";
-
-module.exports = {
+export default {
   up: (queryInterface, Sequelize) => queryInterface.createTable('Users', {
     id: {
       allowNull: false,
@@ -8,17 +6,29 @@ module.exports = {
       primaryKey: true,
       type: Sequelize.INTEGER
     },
-    firstname: {
+    firstName: {
       type: Sequelize.STRING
     },
-    middlename: {
+    middleName: {
       type: Sequelize.STRING
     },
-    lastname: {
+    lastName: {
       type: Sequelize.STRING
     },
-    user_type: {
+    email: {
       type: Sequelize.STRING
+    },
+    phone: {
+      type: Sequelize.STRING
+    },
+    password: {
+      type: Sequelize.STRING
+    },
+    userType: {
+      type: Sequelize.STRING
+    },
+    isVerified: {
+      type: Sequelize.BOOLEAN
     },
     role: {
       type: Sequelize.STRING
@@ -32,6 +42,5 @@ module.exports = {
       type: Sequelize.DATE
     }
   }),
-  down: queryInterface => queryInterface.dropTable('Users')
+  down: (queryInterface) => queryInterface.dropTable('Users')
 };
-//# sourceMappingURL=20200505123246-create-user.js.map

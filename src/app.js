@@ -1,15 +1,17 @@
-// const app = async () => '#BuildforSDG';
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import path from 'path';
+import Router from './routes/index';
 
 
 const app = express();
 app.use(morgan('dev'));
 
-app.use(cors());
+const API_VERSION = '/api/v1';
 
+
+app.use(cors());
 app.use(express.json());
 app.use(
   express.urlencoded({
@@ -21,6 +23,8 @@ app.use(express.static('./docs'));
 app.get('/', (req, res) => {
   res.sendFile(path.resolve('./docs/index.html'));
 });
+
+app.use(`${API_VERSION}`, Router);
 
 
 app.all('*', (err, req, res, next) => {
