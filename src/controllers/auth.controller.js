@@ -34,11 +34,14 @@ class AuthController {
       // 3) Send verification link  to user's email
       const verificationURL = `${req.protocol}://${req.get('host')}/api/v1/auth/verification/${token}`;
       const message = ` Click on this link to verify your account: ${verificationURL}`;
-      await sendEmail({
+      const info = await sendEmail({
         email: result.email,
         subject: 'Your link only (valid for some mins)',
         message
       });
+
+      // eslint-disable-next-line no-console
+      console.log('Message sent: %s', info);
 
       // send success response
       return response.sendSuccess(res, 201, {
