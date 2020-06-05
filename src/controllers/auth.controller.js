@@ -31,24 +31,22 @@ class AuthController {
       const result = newUser.toJSON();
       const token = Auth.signJwt(result);
       delete result.password;
-      if (result.email) {
-        // 3) Send verification link  to user's email
-        const verificationURL = `${req.protocol}://${req.get('host')}/api/v1/auth/verification/${token}`;
+      // 3) Send verification link  to user's email
+      const verificationURL = `${req.protocol}://${req.get('host')}/api/v1/auth/verification/${token}`;
+      const message = ` Click on this link to verify your account: ${verificationURL}`;
+      await sendEmail({
+        email: result.email,
+        subject: 'Your link only (valid for some mins)',
+        message
+      });
 
-        const message = ` Click on this link to verify your account: ${verificationURL}`;
-        await sendEmail({
-          email: result.email,
-          subject: 'Your link only (valid for some mins)',
-          message
-        });
-        return response.sendSuccess(res, 201, {
-          token,
-          ...result
-        });
-      }
-      return response.sendError(res, 500, 'Something went wrong');
+      // send success response
+      return response.sendSuccess(res, 201, {
+        token,
+        ...result
+      });
     } catch (err) {
-      return response.sendError(res, 400, err.message);
+      return response.sendError(res, 500, 'Something went wrong');
     }
   }
 
