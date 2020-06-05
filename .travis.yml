@@ -9,17 +9,16 @@ env:
  global:
     - export COVERALLS_REPO_TOKEN=RWqmqUaQfZ888bV68WpvhREH0L27uOgaS
     - export NODE_ENV=test
-    - export TEST_DB_DATABASE=uzqwdhvn
-    - export TEST_DB_USER=uzqwdhvn
-    - export TEST_DB_PASSWORD=N_xf47Cco8WWtXzh887OSg2sOMQ5RdR_
-    - export TEST_DB_HOST=drona.db.elephantsql.com
+    - export TEST_DB_DATABASE=hzcwkfdn
+    - export TEST_DB_USER=hzcwkfdn
+    - export TEST_DB_PASSWORD=i7krwq1d9GeqQ8RrrAD7m1tNCd5kyprG
+    - export TEST_DB_HOST=ruby.db.elephantsql.com
     - export EMAIL_USERNAME=88b41fce5c457e
     - export EMAIL_PASSWORD=1e0308731e6e44
     - export EMAIL_HOST=smtp.mailtrap.io
     - export EMAIL_PORT=25
 
-cache:
-  npm: false
+cache: npm
 
 before_install:
   - npm config set spin false
